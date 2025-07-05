@@ -1,41 +1,71 @@
 # MT5 TP/SL Calculator 📊
 
-A simple terminal-based tool to calculate and view **Take Profit (TP)** and **Stop Loss (SL)** projections for active trades on **MetaTrader 5**.
+This is a simple tool that helps you see how much profit (TP) or loss (SL) you might get from your current trades on MetaTrader 5.
 
 
 ---
 
-## 🚀 Features
+## ✅ What It Does
 
-- Works with **any MT5 broker** and **any symbol**
-- Real-time data on open positions
-- Clean interface with colored output:
-  - 🟢 TP profit in green
-  - 🔴 SL risk in red
-- Navigation:
-  - `↑` View detailed trade breakdown
-  - `↓` View portfolio summary
-  - `Enter` Refresh the data
+- Calculates your **potential profit** (Take Profit / TP)
+- Calculates your **potential loss** (Stop Loss / SL)
+- Displays overall risk to your account
+- Helps you monitor your open positions more easily
 
 ---
 
 ## 🛠 Requirements
 
-- MetaTrader 5 (must be installed and logged in)
-- Python 3.7
-  > First-time users don’t need to manually install anything — required packages are auto-installed.
+- MetaTrader 5 installed and logged in (any broker)
+- Python
+> required pip packages will be auto installed
 
 ---
 
-## 📦 How to Run
+## ▶️ How to Run
 
-Download and run **TPSL Calculator.py**
+1. Open MetaTrader 5 and log in to your account  
+2. Download this file: **TPSL Calculator.py**  
+3. Double-click to run it
+Make sure your MT5 terminal stays open while using the tool.
 
-Make sure your MT5 terminal is open and logged in before running the script.
+
+---
+
+## 📷 Sample Output
+
+```text
+====== SUMMARY ======
+
+Trades Summary     : BUY = 2    |   SELL = 1
+TP Target         : $35.40
+SL Risk           : $-22.60
+Risk on Account   : 0.23%
+Account Balance   : $10,000.00
+Today's P&L       : 1W-0L | $12.55
+
+↑ Up = Details   ↓ Down = Summary   Enter = Refresh
+```
+
+```text
+====== DETAILS ======
+
+XAUUSD | BUY | Volume: 0.05
+Current P&L       : $4.15
+TP Target         : $20.50
+SL Risk           : $-10.30
+R/R Ratio         : 1.99
+
+BTCUSD | SELL | Volume: 0.02
+Current P&L       : $-1.25
+TP Target         : $14.90
+SL Risk           : $-8.10
+R/R Ratio         : 1.84
+
+↑ Up = Details   ↓ Down = Summary   Enter = Refresh
+```
 
 ---
 
 ## 📬 Contact
-
-For help, suggestions, or feedback:  
 **Telegram:** [@hazyx7](https://t.me/hazyx7)
