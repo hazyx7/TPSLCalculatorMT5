@@ -32,7 +32,7 @@ def clear_screen():
 def print_loading_bar():
     bar = "Connecting to MetaTrader 5\n["
     print(bar, end="", flush=True)
-    for i in range(10):
+    for _ in range(10):
         time.sleep(0.05)
         print("█", end="", flush=True)
     print("] Connected!")
@@ -69,13 +69,14 @@ def get_trades():
 
 def print_summary(positions, wins, losses, pnl_today, balance):
     print("\n====== SUMMARY ======\n")
-    buy, sell, tp_total, sl_total = 0, 0, 0.0, 0.0
+    buy, sell, tp_total, sl_total, cur_total = 0, 0, 0.0, 0.0, 0.0
     for pos in positions:
         info = mt5.symbol_info(pos.symbol)
         if not info or info.point == 0: continue
         pt, tv = info.point, info.trade_tick_value
         tp, sl, op, vol = pos.tp, pos.sl, pos.price_open, pos.volume
         typ = pos.type
+        cur_total += pos.profit
         if typ == 0: buy += 1
         else: sell += 1
         if tp > 0:
@@ -92,13 +93,15 @@ def print_summary(positions, wins, losses, pnl_today, balance):
 
     risk_pct = abs(sl_total / balance * 100) if balance else 0
     perf = GREEN if pnl_today >= 0 else RED
+    cur_color = GREEN if cur_total >= 0 else RED
     print(f"Trades Summary     : BUY = {buy}    |   SELL = {sell}")
+    print(f"{cur_color}Total Current P&L : ${cur_total:.2f}{RESET}")
     print(f"{GREEN}TP Target         : ${tp_total:.2f}{RESET}")
     print(f"{RED}SL Risk           : ${sl_total:.2f}{RESET}")
     print(f"Risk on Account   : {risk_pct:.2f}%")
     print(f"Account Balance   : ${balance:.2f}")
     print(f"{perf}Today's P&L       : {wins}W-{losses}L | ${pnl_today:.2f}{RESET}")
-    print("\n↑ Up = Details   ↓ Down = Summary   Enter = Refresh")
+    print("\nTAB = Toggle Summary/Details")
 
 def print_details(positions):
     print("\n====== DETAILS ======\n")
@@ -109,8 +112,9 @@ def print_details(positions):
         sym, vol, typ = pos.symbol, pos.volume, pos.type
         op, tp, sl, cur = pos.price_open, pos.tp, pos.sl, pos.profit
         trade = "BUY" if typ == 0 else "SELL"
+        cur_color = GREEN if cur >= 0 else RED
         print(f"{sym} | {trade} | Volume: {vol:.2f}")
-        print(f"Current P&L       : ${cur:.2f}")
+        print(f"{cur_color}Current P&L       : ${cur:.2f}{RESET}")
         if tp > 0:
             dist = abs(tp - op) / pt
             val = dist * tv * vol
@@ -130,38 +134,32 @@ def print_details(positions):
             rr = abs(tp - op) / abs(sl - op)
             print(f"R/R Ratio         : {rr:.2f}")
         print()
-    print("↑ Up = Details   ↓ Down = Summary   Enter = Refresh")
+    print("TAB = Toggle Summary/Details")
 
 def run():
     global SHOW_DETAILS
     print_loading_bar()
-    last_action = None
     while True:
         clear_screen()
         positions, wins, losses, pnl_today, balance = get_trades()
-        if not positions:
-            print("No open trades found.")
-            input("\nPress Enter to exit...")
-            break
-        if last_action == 'refreshed':
-            clear_screen()
-            last_action = None
         if SHOW_DETAILS:
             print_details(positions)
         else:
             print_summary(positions, wins, losses, pnl_today, balance)
-        key = wait_for_key()
-        if key == 'up': SHOW_DETAILS = True
-        elif key == 'down': SHOW_DETAILS = False
-        elif key == 'enter': last_action = 'refreshed'
+
+        # Wait small delay for refresh, but allow TAB key toggle
+        for _ in range(100):  # total ~0.5 sec
+            if msvcrt.kbhit():
+                key = msvcrt.getch()
+                if key == b'\t':  # TAB key
+                    SHOW_DETAILS = not SHOW_DETAILS
+                    break
+            time.sleep(0.005)
 
 def wait_for_key():
     key = msvcrt.getch()
-    if key == b'\xe0':
-        arrow = msvcrt.getch()
-        if arrow == b'H': return 'up'
-        if arrow == b'P': return 'down'
-    elif key == b'\r': return 'enter'
+    if key == b'\t':
+        return 'tab'
     return None
 
 # Connect & Run
