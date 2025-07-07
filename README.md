@@ -1,37 +1,40 @@
 # MT5 TP/SL Calculator 📊
 
-This is a simple tool that helps you see how much profit (TP) or loss (SL) you might get from your current trades on MetaTrader 5.
-
+A simple tool to help you track potential **Take Profit (TP)** and **Stop Loss (SL)** outcomes directly from your active trades on MetaTrader 5.
 
 ---
 
-## ✅ What It Does
+## ✅ Features
 
-- Calculates your **potential profit** (Take Profit / TP)
-- Calculates your **potential loss** (Stop Loss / SL)
-- Displays overall risk to your account
-- Helps you monitor your open positions more easily
+- 🟢 Calculates **potential profit** (TP)
+- 🔴 Calculates **potential loss** (SL)
+- 📉 Displays **total risk** on your account
+- 📊 Tracks **open trades** live with summary or detailed view
+- 🔁 Live refresh every 0.5s
+- 🎨 Colored output for profit/loss clarity
 
 ---
 
 ## 🛠 Requirements
 
-- MetaTrader 5 installed and logged in (any broker)
-- Python
-> required pip packages will be auto installed
+- 🖥 MetaTrader 5 (any broker)
+- 🐍 Python
+- 📦 Required pip packages auto-installed on first run
 
 ---
 
-## ▶️ How to Run
+## ▶️ How to Use
 
-1. Open MetaTrader 5 and log in to your account  
-2. Download this file: **TPSL Calculator.py**  
-3. Double-click to run it
+1. Download the script: **TPSL Calculator.py**  
+2. Double Click to run, or use CMD in the directory to run 
 
-Make sure your MT5 terminal stays open while using the tool.
-
+> ⚠️ Make sure the MT5 terminal stays open while running this tool!
 
 ---
 
 ## 📬 Contact
-**Telegram:** [@hazyx7](https://t.me/hazyx7)
+
+- **Telegram:** [@hazyx7](https://t.me/hazyx7)
+
+---
+
