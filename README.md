@@ -27,6 +27,7 @@ This is a simple tool that helps you see how much profit (TP) or loss (SL) you m
 1. Open MetaTrader 5 and log in to your account  
 2. Download this file: **TPSL Calculator.py**  
 3. Double-click to run it
+
 Make sure your MT5 terminal stays open while using the tool.
 
 
