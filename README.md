@@ -4,7 +4,7 @@ A simple tool to help you track potential **Take Profit (TP)** and **Stop Loss (
 
 ---
 
-## ✅ Features
+## 📦 Features
 
 - 🟢 Calculates **potential profit** (TP)
 - 🔴 Calculates **potential loss** (SL)
@@ -17,9 +17,9 @@ A simple tool to help you track potential **Take Profit (TP)** and **Stop Loss (
 
 ## 🛠 Requirements
 
-- 🖥 MetaTrader 5 (any broker)
-- 🐍 Python
-- 📦 Required pip packages auto-installed on first run
+-  MetaTrader 5
+- Python
+  > Required pip packages auto-installed on first run
 
 ---
 
@@ -34,7 +34,7 @@ A simple tool to help you track potential **Take Profit (TP)** and **Stop Loss (
 
 ## 📬 Contact
 
-- **Telegram:** [@hazyx7](https://t.me/hazyx7)
+- **Telegram:** [@Haise](https://t.me/hazyx7)
 
 ---
 
